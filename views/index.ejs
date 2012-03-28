@@ -1,0 +1,57 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <title> MongoDB example </title>
+    <link rel='stylesheet' type='text/css' href='/stylesheets/bootstrap.min.css'>
+</head>
+<body>
+
+<div class='container'>
+	<br>
+	<br>	
+	<h3>Simple MongoDB example</h3>
+	
+	<div style='height:300px;overflow:auto'>
+    <table id='myTable' class='table table-striped table-bordered table-condensed' align='center'>
+	<thead><tr><th>Name</th><th>Email</th><th>Company</th><th>_id</th></tr></thead>	
+    </table>
+    </div>
+	<button id='add' class="btn btn-primary" href="#">Add Random Users</button>
+
+</div>
+</body>
+<script type="text/javascript" src="../javascripts/jquery-1.7.2.min.js"></script>
+<script>
+    $(function() {
+		$('#add').click(function(){
+				var user = "user" + (new Date()).getTime() % 100000;
+				$.post('/adduser', {"name": user, email: user + "@foo.com", company: user + " company"},function(data) {
+					$("table#myTable tr:first")
+					.after(getRowStr(data));
+				}, 'json');		
+		});
+
+		$.getJSON('/existingUsers', function(data) {
+			if(data && data.length) {
+				for(var i = 0; i < data.length; i++) {
+						$("table#myTable tr:last")
+					.after(getRowStr(data[i]));	
+				}
+			}
+
+		});
+		
+		function getRowStr(data) {
+			return '<tr><td>' 
+					+ data.name 
+					+ '</td><td>' 
+					+ data.email 
+					+ '</td><td>' 
+					+ data.company 
+					+ '</td><td>' 
+					+ data._id + '</td></tr>';
+		}
+    });
+</script>
+</html> 
+

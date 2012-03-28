@@ -1,0 +1,11 @@
+{
+    "name": "mongoapp1"
+  , "description" : "Example MongoDB + Express app on Cloud Foundry"	
+  , "version": "0.0.1"
+  , "private": true
+  , "dependencies": {
+      "express": "2.5.0"
+    , "ejs": ""
+	, "mongodb" : ""
+  }
+}
