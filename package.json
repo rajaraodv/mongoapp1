@@ -7,5 +7,6 @@
       "express": "2.5.0"
     , "ejs": ""
 	, "mongodb" : ""
+	, "cloudfoundry": ""
   }
 }
